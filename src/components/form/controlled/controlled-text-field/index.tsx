@@ -66,6 +66,7 @@ export const ControlledTextField = <
   disableAutofill,
   onChange,
   onFocus,
+  ...otherProps
 }: ControlledTextFieldProps<TFieldValues, TName>) => {
   const { field, fieldState } = useController({
     name,
@@ -97,6 +98,7 @@ export const ControlledTextField = <
       InputProps={InputProps}
       type={type}
       disableAutofill={disableAutofill}
+      {...otherProps}
     />
   )
 }

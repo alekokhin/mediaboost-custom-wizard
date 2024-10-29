@@ -46,6 +46,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       helperText,
       required,
       disableAutofill,
+      sx,
       ...textFieldProps
     },
     ref,
@@ -67,7 +68,7 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
           error={error}
           type={textFieldProps.type}
           sx={{
-            border: '1px solid rgba(216, 218, 220, 1)',
+            ...sx,
             borderRadius: '10px',
           }}
           {...(disableAutofill

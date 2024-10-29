@@ -49,6 +49,7 @@ export const ControlledTextArea = <
 
   return (
     <TextArea
+      {...otherProps}
       fullWidth={fullWidth}
       multiline={multiline}
       rows={rows}

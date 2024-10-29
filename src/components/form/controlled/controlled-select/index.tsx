@@ -53,6 +53,7 @@ export const ControlledSelect = <
   fullWidth,
   helperText,
   options,
+  ...otherProps
 }: ControlledTextFieldProps<TFieldValues, TName, T>) => {
   const { field, fieldState } = useController({
     name,
@@ -65,7 +66,6 @@ export const ControlledSelect = <
 
   return (
     <Select
-      sx={{ borderRadius: '50px' }}
       ref={field.ref}
       value={field.value}
       onChange={field.onChange}
@@ -76,6 +76,7 @@ export const ControlledSelect = <
       disabled={disabled}
       required={required}
       options={options}
+      {...otherProps}
     />
   )
 }

@@ -34,7 +34,7 @@ const CustomStepIcon: React.FC<StepIconProps> = ({ active, completed }) => {
 }
 const getStep = (step: number) => {
   switch (step) {
-    case 0: {
+    case 3: {
       return <AddressStep />
     }
     case 1: {
@@ -43,7 +43,7 @@ const getStep = (step: number) => {
     case 2: {
       return <ImagesStep />
     }
-    case 3: {
+    case 0: {
       return <DescriptionStep />
     }
     case 4: {
@@ -66,9 +66,10 @@ const NewProperty = () => {
   ]
   const [activeStep, setActiveStep] = useState(0)
 
-  const methods = useForm<TYPES.PropertyFormData>({
-    mode: 'onChange',
-  })
+  const methods = useForm<TYPES.PropertyFormData>({})
+
+  // eslint-disable-next-line no-console
+  console.log(methods.getValues())
 
   const onSubmit = (data: TYPES.PropertyFormData) => {
     if (activeStep === steps.length - 1) {
@@ -92,23 +93,27 @@ const NewProperty = () => {
 
   return (
     <FormProvider {...methods}>
-      <Container>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <Container sx={{ padding: '0' }}>
+        <Box component="form" onSubmit={methods.handleSubmit(onSubmit)}>
           <Stack
             sx={{
-              padding: '10px',
+              padding: '16px 0px 10px 0px',
               height: '95dvh',
             }}
           >
             <Stepper alternativeLabel activeStep={activeStep}>
-              {steps.map((label, index) => (
+              {steps.map(label => (
                 <Step key={label}>
                   <StepLabel StepIconComponent={CustomStepIcon} />
                 </Step>
               ))}
             </Stepper>
-            <Container sx={{ height: '85%' }}>{getStep(activeStep)}</Container>
-            <Stack sx={{ height: '10%' }}>
+            <Container
+              sx={{ height: '85%', padding: '16px', overflow: 'auto' }}
+            >
+              {getStep(activeStep)}
+            </Container>
+            <Stack>
               <Box sx={{ my: 2 }}>
                 <LinearProgress variant="determinate" value={progress} />
               </Box>
@@ -128,7 +133,7 @@ const NewProperty = () => {
               </Box>
             </Stack>
           </Stack>
-        </form>
+        </Box>
       </Container>
     </FormProvider>
   )

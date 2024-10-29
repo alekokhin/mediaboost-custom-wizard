@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/todo-tag */
 import { ArrowDropDown } from '@mui/icons-material'
 import {
   Checkbox,
@@ -9,7 +8,6 @@ import {
   useTheme,
 } from '@mui/material'
 import { FormControl, FormControlProps } from 'components/form/form-control'
-import { COLORS } from 'constants/colors'
 import { Dispatch, SetStateAction } from 'react'
 
 export type SelectOption = {
@@ -36,6 +34,7 @@ export const Select = <T extends string>({
   multiple,
   disabled,
   fullWidth,
+  ...otherProps
 }: SelectProps<T>) => {
   const theme = useTheme()
 
@@ -51,19 +50,16 @@ export const Select = <T extends string>({
       required={required}
     >
       <MuiSelect
+        {...otherProps}
         value={value}
+        variant="standard"
         onChange={event => {
-          const value: T | Array<T | 'ALL'> | string = event.target.value
-          // eslint-disable-next-line sonarjs/todo-tag
-          //TODO: Remove type assertion
-          type Value = typeof value extends Array<T> ? Array<T> : T
-
-          if (Array.isArray(value) && value.includes('ALL')) {
-            return isAllSelected
-              ? onChange?.([])
-              : onChange?.(options.map(option => option.value))
+          const newValue = event.target.value
+          if (Array.isArray(newValue) && newValue.includes('ALL')) {
+            onChange?.(isAllSelected ? [] : options.map(option => option.value))
+          } else {
+            onChange?.(newValue as T | Array<T>)
           }
-          onChange?.(event.target.value as Value)
         }}
         multiple={multiple}
         displayEmpty
@@ -74,22 +70,18 @@ export const Select = <T extends string>({
           <ArrowDropDown
             {...props}
             sx={{
-              mr: '5px',
+              ml: '5px',
               '&.MuiSelect-icon': {
                 color: '#DBDEE3',
                 '&.Mui-disabled': {
-                  color: ({ palette }) => palette.text.disabled,
+                  color: theme.palette.text.disabled,
                 },
               },
             }}
           />
         )}
         sx={{
-          border: ' 1px #DBDEE3 solid',
-          height: '38px',
-
-          borderRadius: '6px',
-          backgroundColor: COLORS.FieldsBg,
+          height: '40px',
           '& .MuiInputBase-input': {
             color: value === '' ? 'text.secondary' : undefined,
           },
@@ -106,9 +98,7 @@ export const Select = <T extends string>({
             if (isAllSelected) {
               return 'All'
             }
-            return (selected as Array<T>) //TODO: Remove type assertion
-              .map(renderLabel)
-              .join(', ')
+            return (selected as Array<T>).map(renderLabel).join(', ')
           }
           return renderLabel(selected as T)
         }}
