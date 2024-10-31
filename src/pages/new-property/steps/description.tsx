@@ -1,7 +1,9 @@
-// steps/description.tsx
+import 'react-international-phone/style.css'
+
 import { Box, Stack, Typography } from '@mui/material'
 import { ControlledTextArea } from 'components/form/controlled/controlled-text-area'
 import { ControlledTextField } from 'components/form/controlled/controlled-text-field'
+import { MuiPhone } from 'components/form/controlled/phone-number'
 import { email } from 'components/form/validations'
 import { useFormContext } from 'react-hook-form'
 
@@ -32,6 +34,13 @@ const DescriptionStep = () => {
           <Typography fontWeight="700" fontSize="16px">
             Phone Number
           </Typography>
+          <MuiPhone
+            control={control}
+            fullWidth
+            required
+            name="description.phone"
+            defaultCountry="ge"
+          />
         </Box>
         <Box>
           <Typography fontWeight="700" fontSize="16px">

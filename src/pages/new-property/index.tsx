@@ -93,7 +93,7 @@ const NewProperty = () => {
 
   return (
     <FormProvider {...methods}>
-      <Container sx={{ padding: '0' }}>
+      <Container sx={{ padding: '0' }} maxWidth="sm">
         <Box component="form" onSubmit={methods.handleSubmit(onSubmit)}>
           <Stack
             sx={{
