@@ -17,7 +17,6 @@ import AddressStep from './steps/address'
 import DescriptionStep from './steps/description'
 import DetailsStep from './steps/details'
 import ImagesStep from './steps/images'
-import PaymentStep from './steps/payment'
 import ReviewStep from './steps/review'
 
 const CustomStepIcon: React.FC<StepIconProps> = ({ active, completed }) => {
@@ -34,7 +33,7 @@ const CustomStepIcon: React.FC<StepIconProps> = ({ active, completed }) => {
 }
 const getStep = (step: number) => {
   switch (step) {
-    case 3: {
+    case 0: {
       return <AddressStep />
     }
     case 1: {
@@ -43,14 +42,11 @@ const getStep = (step: number) => {
     case 2: {
       return <ImagesStep />
     }
-    case 0: {
+    case 3: {
       return <DescriptionStep />
     }
     case 4: {
       return <ReviewStep />
-    }
-    case 5: {
-      return <PaymentStep />
     }
   }
 }
@@ -62,14 +58,10 @@ const NewProperty = () => {
     'Property images',
     'Additional description',
     'Final review',
-    'Payment',
   ]
   const [activeStep, setActiveStep] = useState(0)
 
   const methods = useForm<TYPES.PropertyFormData>({})
-
-  // eslint-disable-next-line no-console
-  console.log(methods.getValues())
 
   const onSubmit = (data: TYPES.PropertyFormData) => {
     if (activeStep === steps.length - 1) {
@@ -108,9 +100,7 @@ const NewProperty = () => {
                 </Step>
               ))}
             </Stepper>
-            <Container
-              sx={{ height: '85%', padding: '16px', overflow: 'auto' }}
-            >
+            <Container sx={{ height: '85%', padding: '16px' }}>
               {getStep(activeStep)}
             </Container>
             <Stack>

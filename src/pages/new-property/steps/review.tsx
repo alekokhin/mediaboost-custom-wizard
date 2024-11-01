@@ -21,7 +21,7 @@ const ReviewStep = () => {
           height="200px"
           sx={{ backgroundColor: 'red', borderRadius: '10px', padding: '10px' }}
         >
-          <Typography variant="h1">here will be slider</Typography>
+          <Typography variant="h1"></Typography>
         </Box>
 
         <Box
