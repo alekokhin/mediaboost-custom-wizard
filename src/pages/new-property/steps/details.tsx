@@ -49,28 +49,35 @@ const DetailsStep = () => {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 2 }}>
-      <Stack spacing={7}>
+      <Stack spacing={6}>
         <Typography fontWeight="400" fontSize="14px" lineHeight="17.5px">
           Additional Property-Specific Information
         </Typography>
-        <Stack spacing={7}>
-          <Stack spacing={3}>
-            {details.map((detail, index) => (
-              <Box key={uuid()}>
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="space-between"
-                >
-                  <Typography>{detail.label}:</Typography>
-                  <Counter
-                    control={control}
-                    name={detail.name as keyof TYPES.PropertyFormData}
-                  />
+        <Stack spacing={6}>
+          <Stack spacing={2}>
+            {details.map((detail, index) => {
+              // eslint-disable-next-line no-console
+              console.log(detail.name)
+              return (
+                <Box key={uuid()}>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Typography>{detail.label}:</Typography>
+                    <Counter
+                      control={control}
+                      name={
+                        ('details.' +
+                          detail.name) as keyof TYPES.PropertyFormData
+                      }
+                    />
+                  </Box>
+                  {index !== details.length - 1 && <Divider />}
                 </Box>
-                {index !== details.length - 1 && <Divider />}
-              </Box>
-            ))}
+              )
+            })}
           </Stack>
           <Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -96,7 +103,7 @@ const DetailsStep = () => {
                 </Box>
                 <ControlledSelect
                   variant="standard"
-                  value={'USD'}
+                  defaultValue={'USD'}
                   control={control}
                   name="details.currency"
                   options={currencyOptions}
@@ -111,7 +118,7 @@ const DetailsStep = () => {
               >
                 <ControlledSelect
                   variant="standard"
-                  value={'Month'}
+                  defaultValue={'Month'}
                   control={control}
                   name="details.period"
                   options={periodOptions}

@@ -20,7 +20,7 @@ const DescriptionStep = () => {
         control={control}
         multiline
         name="description.description"
-        rows={10}
+        rows={8}
         slotProps={{
           input: { sx: { borderRadius: '10px' } },
         }}

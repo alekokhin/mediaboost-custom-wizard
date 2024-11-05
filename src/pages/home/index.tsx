@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <Container
       sx={{
-        height: '90dvh',
+        height: '98dvh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

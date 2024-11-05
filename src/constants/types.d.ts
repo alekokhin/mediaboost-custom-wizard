@@ -38,7 +38,10 @@ declare namespace TYPES {
 
     description: {
       description: string
-      phone: string
+      phone: {
+        country: string
+        number: string
+      }
       email: string
     }
   }

@@ -40,10 +40,10 @@ const getStep = (step: number) => {
       return <DetailsStep />
     }
     case 2: {
-      return <ImagesStep />
+      return <DescriptionStep />
     }
     case 3: {
-      return <DescriptionStep />
+      return <ImagesStep />
     }
     case 4: {
       return <ReviewStep />
@@ -55,13 +55,17 @@ const NewProperty = () => {
   const steps = [
     'Property address',
     'Property details',
-    'Property images',
     'Additional description',
+    'Property images',
     'Final review',
   ]
   const [activeStep, setActiveStep] = useState(0)
 
-  const methods = useForm<TYPES.PropertyFormData>({})
+  const methods = useForm<TYPES.PropertyFormData>({
+    defaultValues: {
+      details: { period: 'Month', currency: 'USD' },
+    },
+  })
 
   const onSubmit = (data: TYPES.PropertyFormData) => {
     if (activeStep === steps.length - 1) {
