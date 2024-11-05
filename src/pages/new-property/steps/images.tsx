@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable sonarjs/sonar-no-unused-vars */
-/* eslint-disable sonarjs/no-dead-store */
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/pagination'
@@ -8,7 +5,6 @@ import 'swiper/css/pagination'
 import { Box, Button, Stack, Typography } from '@mui/material'
 import addImage from 'assets/icons/addImage.png'
 import { TextField } from 'components/form/basic/text-field'
-import { useState } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { FreeMode, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -16,7 +12,7 @@ import { v4 as uuid } from 'uuid'
 
 const ImagesStep = () => {
   const { control } = useFormContext<TYPES.PropertyFormData>()
-  const { fields, append, remove, update } = useFieldArray({
+  const { fields, append, update } = useFieldArray({
     control,
     name: 'images',
   })
@@ -25,12 +21,12 @@ const ImagesStep = () => {
     const file = event.target.files
     if (file) {
       for (const image of file) {
+        // eslint-disable-next-line no-console
         append({ image: image, description: '' })
       }
     }
   }
   const maxWords = 150
-  const [description, setDescription] = useState('')
 
   const handleDescriptionBlur =
     (index: number) => (event: React.FocusEvent<HTMLInputElement>) => {
@@ -39,15 +35,9 @@ const ImagesStep = () => {
       console.log(text)
 
       if (text.length <= maxWords) {
-        update(index, { ...fields[index], description })
+        update(index, { ...fields[index], description: text })
       }
     }
-  const handleDescriptionChange = (event: any) => {
-    const text = event.target.value
-    if (text.length <= maxWords) {
-      setDescription(text)
-    }
-  }
 
   return (
     <Stack
@@ -87,7 +77,7 @@ const ImagesStep = () => {
               >
                 <Box
                   component="img"
-                  src={field.image}
+                  src={URL.createObjectURL(field.image)}
                   alt="Uploaded"
                   sx={{
                     maxWidth: '100%',

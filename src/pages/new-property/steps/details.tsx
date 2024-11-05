@@ -56,8 +56,6 @@ const DetailsStep = () => {
         <Stack spacing={6}>
           <Stack spacing={2}>
             {details.map((detail, index) => {
-              // eslint-disable-next-line no-console
-              console.log(detail.name)
               return (
                 <Box key={uuid()}>
                   <Box

@@ -20,8 +20,6 @@ import { v4 as uuid } from 'uuid'
 const ReviewStep = () => {
   const { getValues } = useFormContext<TYPES.PropertyFormData>()
   const values = getValues()
-  // eslint-disable-next-line no-console
-  console.log(values)
 
   return (
     <Box
@@ -58,7 +56,7 @@ const ReviewStep = () => {
               <Stack spacing={2} width="100%">
                 <Box
                   component="img"
-                  src={image.image}
+                  src={URL.createObjectURL(image.image)}
                   sx={{
                     borderRadius: '10px',
                   }}
