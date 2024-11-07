@@ -11,7 +11,7 @@ declare namespace TYPES {
   }
   type UserState = 'unauthenticated' | 'authenticated' | 'pending'
   type PropertyImage = {
-    image: string
+    image: Blob
     description: string
   }
   type PropertyFormData = {

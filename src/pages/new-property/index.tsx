@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Check, Circle } from '@mui/icons-material'
 import {
   Box,
@@ -10,6 +11,8 @@ import {
   StepLabel,
   Stepper,
 } from '@mui/material'
+import { useMutation } from '@tanstack/react-query'
+import { sendWizard } from 'api/wizard'
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 
@@ -31,6 +34,7 @@ const CustomStepIcon: React.FC<StepIconProps> = ({ active, completed }) => {
     />
   )
 }
+
 const getStep = (step: number) => {
   switch (step) {
     case 0: {
@@ -48,7 +52,34 @@ const getStep = (step: number) => {
     case 4: {
       return <ReviewStep />
     }
+    default: {
+      return null
+    }
   }
+}
+
+const getFormData = (data: TYPES.PropertyFormData) => {
+  const formData = new FormData()
+  const { images, ...dataWithoutImages } = data
+
+  // Append the main data object
+
+  // Append image descriptions as a JSON string
+  const imageDescriptions = images.map((image, index) => ({
+    imageIndex: index,
+    description: image.description,
+  }))
+  formData.append(
+    'data',
+    JSON.stringify({ ...dataWithoutImages, imageDescriptions }),
+  )
+
+  for (const image of images) {
+    formData.append('images ', image.image)
+  }
+  // Use JSON.stringify to convert the array to a string
+
+  return formData // Return the FormData object
 }
 
 const NewProperty = () => {
@@ -61,6 +92,10 @@ const NewProperty = () => {
   ]
   const [activeStep, setActiveStep] = useState(0)
 
+  // Set up the mutation with the correct type for FormData
+  const $sendWizard = useMutation({
+    mutationFn: sendWizard,
+  })
   const methods = useForm<TYPES.PropertyFormData>({
     defaultValues: {
       details: { period: 'Month', currency: 'USD' },
@@ -69,9 +104,15 @@ const NewProperty = () => {
 
   const onSubmit = (data: TYPES.PropertyFormData) => {
     if (activeStep === steps.length - 1) {
-      // eslint-disable-next-line no-console
-      console.log('Final form data:', data)
-      // Handle form submission
+      const body = getFormData(data)
+      $sendWizard.mutate(body, {
+        onSuccess: data => {
+          console.log('Data submitted successfully:', data)
+        },
+        onError: error => {
+          console.error('Error submitting data:', error)
+        },
+      })
       return
     }
     handleNext()
@@ -91,12 +132,7 @@ const NewProperty = () => {
     <FormProvider {...methods}>
       <Container sx={{ padding: '0' }} maxWidth="sm">
         <Box component="form" onSubmit={methods.handleSubmit(onSubmit)}>
-          <Stack
-            sx={{
-              padding: '16px 0px 10px 0px',
-              height: '95dvh',
-            }}
-          >
+          <Stack sx={{ padding: '16px 0px 10px 0px', height: '95dvh' }}>
             <Stepper alternativeLabel activeStep={activeStep}>
               {steps.map(label => (
                 <Step key={label}>

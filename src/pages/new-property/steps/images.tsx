@@ -4,7 +4,7 @@ import 'swiper/css/pagination'
 
 import { Box, Button, Stack, Typography } from '@mui/material'
 import addImage from 'assets/icons/addImage.png'
-import { TextField } from 'components/form/basic/text-field'
+import { ControlledTextArea } from 'components/form/controlled/controlled-text-area'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { FreeMode, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -12,32 +12,20 @@ import { v4 as uuid } from 'uuid'
 
 const ImagesStep = () => {
   const { control } = useFormContext<TYPES.PropertyFormData>()
-  const { fields, append, update } = useFieldArray({
+  const { fields, append } = useFieldArray({
     control,
     name: 'images',
   })
+  const maxWords = 150
 
   const handleImageUpload = (event: any) => {
     const file = event.target.files
     if (file) {
       for (const image of file) {
-        // eslint-disable-next-line no-console
         append({ image: image, description: '' })
       }
     }
   }
-  const maxWords = 150
-
-  const handleDescriptionBlur =
-    (index: number) => (event: React.FocusEvent<HTMLInputElement>) => {
-      const text = event.target.value
-      // eslint-disable-next-line no-console
-      console.log(text)
-
-      if (text.length <= maxWords) {
-        update(index, { ...fields[index], description: text })
-      }
-    }
 
   return (
     <Stack
@@ -71,7 +59,7 @@ const ImagesStep = () => {
             <Box height="100%" width="100%">
               <Stack
                 width="100%"
-                height="80%"
+                height="90%"
                 justifyContent="space-between"
                 spacing={3}
               >
@@ -85,26 +73,19 @@ const ImagesStep = () => {
                     borderRadius: '10px',
                   }}
                 />
-                <Box sx={{ position: 'relative', width: '100%' }}>
-                  <TextField
-                    placeholder="Description"
-                    multiline
-                    rows={5}
-                    variant="outlined"
-                    fullWidth
-                    onBlur={handleDescriptionBlur(index)}
-                    slotProps={{
-                      input: { sx: { borderRadius: '10px', height: '100%' } },
-                    }}
-                  />
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    sx={{ position: 'absolute', bottom: 5, right: 8 }}
-                  >
-                    {field.description.length}/{maxWords}
-                  </Typography>
-                </Box>
+
+                <ControlledTextArea
+                  placeholder="Final description..."
+                  control={control}
+                  maxLength={maxWords}
+                  multiline
+                  fullWidth
+                  name={`images.${index}.description`}
+                  rows={5}
+                  slotProps={{
+                    input: { sx: { borderRadius: '10px' } },
+                  }}
+                />
               </Stack>
             </Box>
           </SwiperSlide>

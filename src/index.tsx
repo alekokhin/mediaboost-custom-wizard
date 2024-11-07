@@ -1,4 +1,5 @@
 import 'styles/swiper.css'
+import 'styles/style.css'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import App from 'app'

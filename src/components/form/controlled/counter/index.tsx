@@ -21,8 +21,8 @@ const Counter = <
   fullWidth,
   placeholder,
   InputProps,
-  type,
   disableAutofill,
+  readonly,
   onChange,
   onFocus,
 }: ControlledTextFieldProps<TFieldValues, TName>) => {
@@ -57,7 +57,7 @@ const Counter = <
       </IconButton>
       <TextField
         ref={field.ref}
-        value={field.value || 0}
+        value={field.value}
         onChange={handleChange}
         onFocus={onFocus}
         error={Boolean(fieldState.error)}
@@ -74,7 +74,7 @@ const Counter = <
               border: 'none',
               textAlign: 'center',
             },
-            readOnly: true,
+            readOnly: readonly,
             disableUnderline: true,
           },
         }}
@@ -86,7 +86,7 @@ const Counter = <
           },
         }}
         variant="standard"
-        type={type}
+        type="number"
         disableAutofill={disableAutofill}
       />
       <IconButton onClick={handleIncrement} aria-label="increase" size="small">

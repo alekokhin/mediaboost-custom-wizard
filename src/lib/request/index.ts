@@ -1,1 +1,1 @@
-export * from 'lib/request/request'
+export { request } from './request'

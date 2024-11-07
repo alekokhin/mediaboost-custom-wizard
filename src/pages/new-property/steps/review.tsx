@@ -13,7 +13,7 @@ import Bedroom from 'assets/icons/bedroom.png'
 import Rooms from 'assets/icons/rooms.png'
 import Size from 'assets/icons/size.png'
 import { useFormContext } from 'react-hook-form'
-import { FreeMode } from 'swiper/modules'
+import { FreeMode, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { v4 as uuid } from 'uuid'
 
@@ -44,7 +44,7 @@ const ReviewStep = () => {
           pagination={{
             clickable: true,
           }}
-          modules={[FreeMode]}
+          modules={[FreeMode, Pagination]}
           className="mySwiper"
           style={{
             width: '100%',
@@ -53,7 +53,7 @@ const ReviewStep = () => {
         >
           {values.images.map(image => (
             <SwiperSlide key={uuid()}>
-              <Stack spacing={2} width="100%">
+              <Stack spacing={2} width="100%" sx={{ margin: '0 0 25px 0' }}>
                 <Box
                   component="img"
                   src={URL.createObjectURL(image.image)}
@@ -70,7 +70,7 @@ const ReviewStep = () => {
                     '&::-webkit-scrollbar': { display: 'none' }, // For Chrome, Safari, and Edge
                   }}
                 >
-                  <Typography fontSize="10px" textAlign="center">
+                  <Typography fontSize="15px" textAlign="center">
                     {image.description}
                   </Typography>
                 </Box>

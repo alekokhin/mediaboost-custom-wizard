@@ -19,6 +19,8 @@ const DescriptionStep = () => {
         placeholder="Final description..."
         control={control}
         multiline
+        counter
+        fullWidth
         name="description.description"
         rows={8}
         slotProps={{
@@ -44,7 +46,7 @@ const DescriptionStep = () => {
         </Box>
         <Box>
           <Typography fontWeight="700" fontSize="16px">
-            Contact Info
+            Email
           </Typography>
           <ControlledTextField
             control={control}

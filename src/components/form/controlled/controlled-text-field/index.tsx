@@ -13,6 +13,7 @@ export type ControlledTextFieldProps<
 > = TextFieldProps &
   UseControllerProps<TFieldValues, TName> & {
     disableAutofill?: boolean
+    readonly?: boolean
     onChange?: (value: string) => void // Define onChange prop
   }
 

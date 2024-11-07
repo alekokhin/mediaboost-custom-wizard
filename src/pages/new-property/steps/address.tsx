@@ -1,4 +1,4 @@
-import { Box, Stack } from '@mui/material'
+import { Box, Grid2 } from '@mui/material'
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 import { ControlledTextField } from 'components/form/controlled/controlled-text-field'
 import { useFormContext } from 'react-hook-form'
@@ -28,21 +28,25 @@ const AddressStep = () => {
         justifyContent: 'space-evenly',
       }}
     >
-      <Stack spacing={2}>
-        <ControlledTextField
-          control={control}
-          name="address.country"
-          label="country"
-        />
-        <Box
-          sx={{ display: 'flex', justifyContent: 'space-between', gap: '15px' }}
-        >
+      <Grid2 container spacing={2}>
+        <Grid2 size={12}>
+          <ControlledTextField
+            control={control}
+            name="address.country"
+            label="country"
+            fullWidth
+          />
+        </Grid2>
+
+        <Grid2 size={6}>
           <ControlledTextField
             control={control}
             name="address.city"
             fullWidth
             label="city"
           />
+        </Grid2>
+        <Grid2 size={6}>
           <ControlledTextField
             control={control}
             name="address.zipCode"
@@ -50,15 +54,16 @@ const AddressStep = () => {
             label="zip/postal"
             type="number"
           />
-        </Box>
-        <ControlledTextField
-          control={control}
-          name="address.street"
-          label="street address"
-        />
-        <Box
-          sx={{ display: 'flex', justifyContent: 'space-between', gap: '15px' }}
-        >
+        </Grid2>
+        <Grid2 size={6}>
+          <ControlledTextField
+            control={control}
+            fullWidth
+            name="address.street"
+            label="street address"
+          />
+        </Grid2>
+        <Grid2 size={3}>
           <ControlledTextField
             control={control}
             name="address.apartmentNum"
@@ -66,6 +71,8 @@ const AddressStep = () => {
             label="apartment number"
             type="number"
           />
+        </Grid2>
+        <Grid2 size={3}>
           <ControlledTextField
             control={control}
             name="address.floor"
@@ -73,8 +80,8 @@ const AddressStep = () => {
             label="floor"
             type="number"
           />
-        </Box>
-      </Stack>
+        </Grid2>
+      </Grid2>
       <Box sx={{ height: '50%' }}>
         <LoadScript googleMapsApiKey="">
           <GoogleMap

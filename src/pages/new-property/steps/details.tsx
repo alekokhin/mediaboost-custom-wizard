@@ -66,6 +66,8 @@ const DetailsStep = () => {
                     <Typography>{detail.label}:</Typography>
                     <Counter
                       control={control}
+                      readonly={index !== 0}
+                      placeholder="0"
                       name={
                         ('details.' +
                           detail.name) as keyof TYPES.PropertyFormData
@@ -78,8 +80,23 @@ const DetailsStep = () => {
             })}
           </Stack>
           <Box>
+            <Typography
+              fontWeight="400"
+              fontSize="14px"
+              lineHeight="17.5px"
+              marginBottom="10px"
+            >
+              Set Your Rental Price:
+            </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Box sx={{ width: '50%', display: 'flex', gap: '10px' }}>
+                <ControlledSelect
+                  variant="standard"
+                  defaultValue={'USD'}
+                  control={control}
+                  name="details.currency"
+                  options={currencyOptions}
+                />
                 <Box sx={{ width: '60%' }}>
                   <ControlledTextField
                     fullWidth
@@ -99,21 +116,16 @@ const DetailsStep = () => {
                     variant="standard"
                   />
                 </Box>
-                <ControlledSelect
-                  variant="standard"
-                  defaultValue={'USD'}
-                  control={control}
-                  name="details.currency"
-                  options={currencyOptions}
-                />
               </Box>
               <Box
                 sx={{
-                  width: '45%',
+                  width: '40%',
                   display: 'flex',
-                  justifyContent: 'flex-end',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
                 }}
               >
+                <Typography variant="h5">In</Typography>
                 <ControlledSelect
                   variant="standard"
                   defaultValue={'Month'}
