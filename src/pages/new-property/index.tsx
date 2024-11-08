@@ -16,7 +16,7 @@ import { sendWizard } from 'api/wizard'
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 
-import AddressStep from './steps/address'
+import AddressStep from './steps/address/address'
 import DescriptionStep from './steps/description'
 import DetailsStep from './steps/details'
 import ImagesStep from './steps/images'
@@ -125,6 +125,7 @@ const NewProperty = () => {
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1)
   }
+  console.log(methods.getValues())
 
   const progress = (activeStep / (steps.length - 1)) * 100
 

@@ -45,4 +45,13 @@ declare namespace TYPES {
       email: string
     }
   }
+  type country = {
+    flags: {
+      png: string
+      svg: string
+    }
+    name: {
+      common: string
+    }
+  }
 }
