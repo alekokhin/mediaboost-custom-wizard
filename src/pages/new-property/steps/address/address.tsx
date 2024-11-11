@@ -1,5 +1,5 @@
 import { Box, Grid2 } from '@mui/material'
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
+import { GoogleMap, Marker } from '@react-google-maps/api'
 import { useQuery } from '@tanstack/react-query'
 import { getCountries } from 'api/countries'
 import { ControlledAutocomplete } from 'components/form/controlled/controlled-autocomplete'
@@ -116,15 +116,13 @@ const AddressStep = () => {
         </Grid2>
       </Grid2>
       <Box sx={{ height: '50%' }}>
-        <LoadScript googleMapsApiKey="">
-          <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            center={center}
-            zoom={3}
-          >
-            <Marker position={center} />
-          </GoogleMap>
-        </LoadScript>
+        <GoogleMap
+          mapContainerStyle={mapContainerStyle}
+          center={center}
+          zoom={3}
+        >
+          <Marker position={center} />
+        </GoogleMap>
       </Box>
     </Box>
   )
