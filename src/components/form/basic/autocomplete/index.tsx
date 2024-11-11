@@ -15,10 +15,13 @@ export type OptionType = {
 export type AutocompleteProps<T> = Omit<FormControlProps, 'children'> &
   Omit<MuiAutocompleteProps<T, false, false, false>, 'renderInput'> & {
     label?: string
-    options: OptionType[]
+    options: T[]
   }
 
-export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps<any>>(
+export const Autocomplete = forwardRef<
+  HTMLDivElement,
+  AutocompleteProps<OptionType>
+>(
   (
     { options, error, label, helperText, required, sx, htmlFor, ...otherProps },
     ref,

@@ -17,7 +17,7 @@ export type ControlledAutocompleteProps<
 > = Omit<AutocompleteProps<OptionType>, 'onChange' | 'value' | 'ref'> &
   UseControllerProps<TFieldValues, TName> & {
     disableAutofill?: boolean
-    onChange?: (value: any) => void
+    onChange?: (value: OptionType | null) => void
   }
 
 export const ControlledAutocomplete = <
@@ -47,14 +47,30 @@ export const ControlledAutocomplete = <
     },
   })
 
+  // Find the matching option based on the field value
+  const fieldValue = field.value
+    ? options.find((opt: OptionType) => {
+        if (typeof field.value === 'string') {
+          return opt.label === field.value
+        }
+        return opt.label === (field.value as OptionType)?.label
+      }) || null
+    : null
+
   return (
     <Autocomplete
       {...field}
+      value={fieldValue}
       options={options}
       fullWidth={fullWidth}
-      onChange={(_, newValue) => {
-        field.onChange(newValue.label)
+      onChange={(_, newValue: OptionType | null) => {
+        field.onChange(newValue?.label || '')
         onChange?.(newValue)
+      }}
+      getOptionLabel={(option: OptionType) => option.label}
+      isOptionEqualToValue={(option: OptionType, value: OptionType | null) => {
+        if (!value) return false
+        return option.label === value.label
       }}
       ref={field.ref as React.Ref<HTMLDivElement>}
       onFocus={onFocus}
