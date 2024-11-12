@@ -17,10 +17,38 @@ export type SelectOption = {
 
 export type SelectProps<T extends string> = Omit<FormControlProps, 'children'> &
   Omit<MuiSelectProps, 'value' | 'onChange' | 'label'> & {
+    /**
+     * The selected value(s) of the select component.
+     * Can be a single value or an array of values when `multiple` is true.
+     * @type {T | Array<T>}
+     */
     value?: T | Array<T>
+
+    /**
+     * An array of options to display in the dropdown.
+     * Each option is an object with a `label` and `value`.
+     * @type {Array<SelectOption>}
+     */
     options: Array<SelectOption>
+
+    /**
+     * A function that handles changes to the selected value.
+     * @param {T | Array<T>} value - The newly selected value(s).
+     */
     onChange?: Dispatch<SetStateAction<T | Array<T>>>
   }
+/**
+ * `Select` is a custom dropdown component that wraps Material-UI's `Select` component.
+ * It supports both single and multiple selection modes, custom placeholder, and "Select All" functionality.
+ *
+ * @template T - The type of the value being selected, typically a `string`.
+ *
+ * @param {SelectProps<T>} props - The props for the `Select` component.
+ *
+ * @returns {JSX.Element} - A rendered `Select` component.
+ *
+ *
+ */
 
 export const Select = <T extends string>({
   placeholder,

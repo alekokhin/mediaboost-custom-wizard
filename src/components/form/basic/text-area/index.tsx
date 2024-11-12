@@ -7,8 +7,23 @@ import { forwardRef } from 'react'
 
 export type TextAreaProps = Omit<FormControlProps, 'children'> &
   MuiTextFieldProps & {
+    /**
+     * Disables browser auto-fill if set to true.
+     * @type {boolean}
+     */
     disableAutofill?: boolean
   }
+/**
+ * `TextArea` is a customizable wrapper around Material-UI's `TextField` component.
+ * It provides additional support for form controls, validation, and optional auto-fill disabling.
+ *
+ * This component is suitable for rendering multi-line text inputs with optional character limits.
+ *
+ * @param {TextAreaProps} props - The properties for configuring the TextArea component.
+ *
+ * @returns {JSX.Element} - A rendered `TextArea` component.
+ *
+ */
 
 export const TextArea = forwardRef<HTMLDivElement, TextAreaProps>(
   (

@@ -13,10 +13,38 @@ export type ControlledTextAreaProps<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > = TextAreaProps &
   UseControllerProps<TFieldValues, TName> & {
+    /**
+     * Disables browser autofill behavior when set to `true`.
+     * @type {boolean}
+     */
     disableAutofill?: boolean
+
+    /**
+     * If `true`, displays a character counter below the text area.
+     * @type {boolean}
+     */
     counter?: boolean
+
+    /**
+     * Maximum number of characters allowed in the text area.
+     * When set, the component enforces this limit without showing an error.
+     * @type {number}
+     */
     maxLength?: number
   }
+/**
+ * `ControlledTextArea` is a form-controlled version of the `TextArea` component,
+ * designed to work seamlessly with `react-hook-form`. It provides additional features
+ * such as character counting and max length enforcement without displaying validation errors.
+ *
+ * @template TFieldValues - The shape of your form values.
+ * @template TName - The specific field name within your form values.
+ *
+ * @param {ControlledTextAreaProps<TFieldValues, TName>} props - The props for the `ControlledTextArea` component.
+ *
+ * @returns {JSX.Element} - A rendered `ControlledTextArea` component.
+ *
+ */
 
 export const ControlledTextArea = <
   TFieldValues extends FieldValues = FieldValues,

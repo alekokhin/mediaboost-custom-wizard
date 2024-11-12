@@ -17,6 +17,21 @@ import {
 
 import { ControlledTextFieldProps } from '../controlled-text-field'
 
+/**
+ * `MuiPhone` is a controlled phone input component designed for use with `react-hook-form`.
+ * It allows users to enter phone numbers along with selecting their country code using a dropdown.
+ * The component leverages Material-UI (`TextField`, `Select`, `MenuItem`) for styling, along with the `react-international-phone` library for phone number management.
+ *
+ * @template TFieldValues - The shape of form values, extending from `FieldValues`.
+ * @template TName - The specific field path within `TFieldValues`.
+ *
+ * @param {ControlledTextFieldProps<TFieldValues, TName>} props - The properties for configuring the MuiPhone component.
+ * @param {string} defaultCountry - The default country code (ISO2 format) for the phone input.
+ *
+ * @returns {JSX.Element} - A rendered `MuiPhone` component.
+ *
+ */
+
 export const MuiPhone = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,

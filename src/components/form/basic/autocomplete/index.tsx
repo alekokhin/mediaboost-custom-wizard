@@ -14,9 +14,32 @@ export type OptionType = {
 
 export type AutocompleteProps<T> = Omit<FormControlProps, 'children'> &
   Omit<MuiAutocompleteProps<T, false, false, false>, 'renderInput'> & {
+    /**
+     * The label for the autocomplete input.
+     * @type {string}
+     */
     label?: string
+
+    /**
+     * The array of options to display in the dropdown.
+     * Each option must have a `label` property.
+     * Additional properties can be added to the option objects as needed.
+     * @type {T[]}
+     */
     options: T[]
   }
+/**
+ * `Autocomplete` is a reusable component that combines Material-UI's `Autocomplete`
+ * with a custom `FormControl` and `TextField` for a consistent design and functionality.
+ * It provides a convenient way to implement dropdowns with auto-suggestion capabilities.
+ *
+ * @template T - The type of the options array.
+ *
+ * @param {AutocompleteProps<T>} props - The props for the `Autocomplete` component.
+ *
+ * @returns {JSX.Element} - A rendered `Autocomplete` component.
+ *
+ */
 
 export const Autocomplete = forwardRef<
   HTMLDivElement,

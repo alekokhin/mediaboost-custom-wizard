@@ -16,9 +16,33 @@ export type ControlledAutocompleteProps<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > = Omit<AutocompleteProps<OptionType>, 'onChange' | 'value' | 'ref'> &
   UseControllerProps<TFieldValues, TName> & {
+    /**
+     * Disables browser autofill behavior when set to `true`.
+     * @type {boolean}
+     */
     disableAutofill?: boolean
+
+    /**
+     * Callback fired when the selected value changes.
+     * The new value is provided as an `OptionType` or `null`.
+     * @param {OptionType | null} value - The new selected value.
+     */
     onChange?: (value: OptionType | null) => void
   }
+/**
+ * `ControlledAutocomplete` is a form-controlled version of the `Autocomplete` component,
+ * designed to work seamlessly with `react-hook-form`. It integrates with form validation
+ * and management, providing a convenient way to use auto-suggestion dropdowns within forms.
+ *
+ * @template TFieldValues - The shape of your form values.
+ * @template TName - The specific field name within your form values.
+ *
+ * @param {ControlledAutocompleteProps<TFieldValues, TName>} props - The props for the `ControlledAutocomplete` component.
+ *
+ * @returns {JSX.Element} - A rendered `ControlledAutocomplete` component.
+ *
+ *
+ */
 
 export const ControlledAutocomplete = <
   TFieldValues extends FieldValues = FieldValues,

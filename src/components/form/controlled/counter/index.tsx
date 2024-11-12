@@ -7,6 +7,20 @@ import { FieldPath, FieldValues, useController } from 'react-hook-form'
 
 import { ControlledTextFieldProps } from '../controlled-text-field'
 
+/**
+ * `Counter` is a controlled component that combines a text field with increment and decrement buttons.
+ * It is built using Material-UI components and is designed to work seamlessly with `react-hook-form` for form control.
+ * This component is typically used for numeric input fields where users can either type a value or adjust it using buttons.
+ *
+ * @template TFieldValues - The shape of form values, extending from `FieldValues`.
+ * @template TName - The specific field path within `TFieldValues`.
+ *
+ * @param {ControlledTextFieldProps<TFieldValues, TName>} props - The properties for configuring the Counter component.
+ *
+ * @returns {JSX.Element} - A rendered `Counter` component.
+ *
+ */
+
 const Counter = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
