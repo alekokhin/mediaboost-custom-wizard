@@ -19,7 +19,7 @@ export const phoneNumber = {
 export const number = {
   pattern: {
     value: numberRegex,
-    message: 'Please Enter Only Positive Number',
+    message: 'Only Positive Number',
   },
 }
 export const email = {
