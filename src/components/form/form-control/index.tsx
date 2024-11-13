@@ -86,6 +86,7 @@ export const FormControl = forwardRef<HTMLDivElement, FormControlProps>(
             mt: 0.5,
             ml: 2,
             fontSize: '13px',
+            textAlign: 'right',
             color: theme => theme.palette.error.main,
           }}
         >
