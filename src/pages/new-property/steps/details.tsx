@@ -87,7 +87,7 @@ const DetailsStep = () => {
                       }
                     />
                   </Box>
-                  {index !== details.length - 1 && <Divider />}
+                  <Divider />
                 </Grid2>
               )
             })}
