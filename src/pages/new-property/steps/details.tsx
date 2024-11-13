@@ -1,7 +1,7 @@
-import { Box, Divider, Stack, Typography } from '@mui/material'
+import { Box, Divider, Grid2, Stack, Typography } from '@mui/material'
 import { ControlledSelect } from 'components/form/controlled/controlled-select'
 import { ControlledTextField } from 'components/form/controlled/controlled-text-field'
-import Counter from 'components/form/controlled/counter'
+import { number } from 'components/form/validations'
 import { useFormContext } from 'react-hook-form'
 import { v4 as uuid } from 'uuid'
 
@@ -54,20 +54,33 @@ const DetailsStep = () => {
           Additional Property-Specific Information
         </Typography>
         <Stack spacing={6}>
-          <Stack spacing={2}>
+          <Grid2 container spacing={2}>
             {details.map((detail, index) => {
               return (
-                <Box key={uuid()}>
+                <Grid2 size={6} key={uuid()}>
                   <Box
                     display="flex"
                     alignItems="center"
                     justifyContent="space-between"
                   >
                     <Typography>{detail.label}:</Typography>
-                    <Counter
+                    <ControlledTextField
                       control={control}
+                      type="number"
+                      rules={number}
                       readonly={index !== 0}
                       placeholder="0"
+                      slotProps={{ input: { sx: { border: 0 } } }}
+                      sx={{
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': {
+                            border: 'none',
+                          },
+                        },
+                        '& .MuiInputBase-input': {
+                          textAlign: 'right', // Horizontal alignment
+                        },
+                      }}
                       name={
                         ('details.' +
                           detail.name) as keyof TYPES.PropertyFormData
@@ -75,10 +88,10 @@ const DetailsStep = () => {
                     />
                   </Box>
                   {index !== details.length - 1 && <Divider />}
-                </Box>
+                </Grid2>
               )
             })}
-          </Stack>
+          </Grid2>
           <Box>
             <Typography
               fontWeight="400"
