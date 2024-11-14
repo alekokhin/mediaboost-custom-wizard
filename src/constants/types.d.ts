@@ -9,6 +9,7 @@ declare namespace TYPES {
     startDate: string
     endDate: string
   }
+
   type UserState = 'unauthenticated' | 'authenticated' | 'pending'
   type PropertyImage = {
     image: Blob
@@ -33,6 +34,7 @@ declare namespace TYPES {
       price: number
       currency: string
       period: string
+      placeOffers: Record<string, { value?: boolean }>
     }
     images: Array<PropertyImage>
 

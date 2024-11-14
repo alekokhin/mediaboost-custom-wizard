@@ -1,9 +1,97 @@
+import {
+  AcUnitOutlined,
+  FireExtinguisher,
+  FireplaceOutlined,
+  FitnessCenterOutlined,
+  KitchenOutlined,
+  LocalHospitalOutlined,
+  LocalLaundryServiceOutlined,
+  LocalParkingOutlined,
+  MedicalServicesOutlined,
+  ParkOutlined,
+  PoolOutlined,
+  WifiOutlined,
+} from '@mui/icons-material'
 import { Box, Divider, Grid2, Stack, Typography } from '@mui/material'
+import PlaceOfferCard from 'components/basics/place-offer-card'
+import { ControlledCheckbox } from 'components/form/controlled/controlled-checkbox'
 import { ControlledSelect } from 'components/form/controlled/controlled-select'
 import { ControlledTextField } from 'components/form/controlled/controlled-text-field'
 import { number } from 'components/form/validations'
 import { useFormContext } from 'react-hook-form'
 import { v4 as uuid } from 'uuid'
+
+const placeOffers = [
+  {
+    label: 'Parking',
+    icon: <LocalParkingOutlined />,
+    key: 'parking',
+  },
+
+  {
+    label: 'Wifi',
+    icon: <WifiOutlined />,
+    key: 'wifi',
+  },
+
+  {
+    label: 'Washer',
+    icon: <LocalLaundryServiceOutlined />,
+    key: 'washer',
+  },
+
+  {
+    label: 'AC',
+    icon: <AcUnitOutlined />,
+    key: 'ac',
+  },
+
+  {
+    label: 'Fitness',
+    icon: <FitnessCenterOutlined />,
+    key: 'fitness',
+  },
+
+  {
+    label: 'Kitchen',
+    icon: <KitchenOutlined />,
+    key: 'kitchen',
+  },
+
+  {
+    label: 'Park',
+    icon: <ParkOutlined />,
+    key: 'park',
+  },
+
+  {
+    label: 'Pool',
+    icon: <PoolOutlined />,
+    key: 'pool',
+  },
+
+  {
+    label: 'Fire extinguisher',
+    icon: <FireExtinguisher />,
+    key: 'fireExtinguisher',
+  },
+
+  {
+    label: 'Fire pit',
+    icon: <FireplaceOutlined />,
+    key: 'firePit',
+  },
+  {
+    label: 'First aid kit',
+    icon: <MedicalServicesOutlined />,
+    key: 'firePit',
+  },
+  {
+    label: 'Local hospital',
+    icon: <LocalHospitalOutlined />,
+    key: 'localHospital',
+  },
+]
 
 const DetailsStep = () => {
   const { control } = useFormContext<TYPES.PropertyFormData>()
@@ -48,12 +136,20 @@ const DetailsStep = () => {
   ]
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 2 }}>
-      <Stack spacing={6}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 2,
+        mt: 2,
+        height: '100%',
+      }}
+    >
+      <Stack height="100%">
         <Typography fontWeight="400" fontSize="14px" lineHeight="17.5px">
           Additional Property-Specific Information
         </Typography>
-        <Stack spacing={6}>
+        <Stack justifyContent="space-between" height="100%" margin="50px 0">
           <Grid2 container spacing={2}>
             {details.map((detail, index) => {
               return (
@@ -92,6 +188,28 @@ const DetailsStep = () => {
               )
             })}
           </Grid2>
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              maxHeight: '200px',
+              overflow: 'auto',
+            }}
+          >
+            {placeOffers.map(placeOffer => (
+              <ControlledCheckbox
+                key={uuid()}
+                control={control}
+                name={`details.placeOffers.${placeOffer.key}`}
+              >
+                <PlaceOfferCard
+                  key={placeOffer.key}
+                  label={placeOffer.label}
+                  icon={placeOffer.icon}
+                />
+              </ControlledCheckbox>
+            ))}
+          </Box>
           <Box>
             <Typography
               fontWeight="400"
