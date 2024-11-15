@@ -198,7 +198,7 @@ const DetailsStep = () => {
           >
             {placeOffers.map(placeOffer => (
               <ControlledCheckbox
-                key={uuid()}
+                key={placeOffer.key}
                 control={control}
                 name={`details.placeOffers.${placeOffer.key}`}
               >

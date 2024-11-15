@@ -64,6 +64,7 @@ export const ControlledCheckbox = <
   inputProps,
   helperText,
   checkboxColor,
+  children,
   ...otherProps
 }: ControlledCheckboxProps<TFieldValues, TName>) => {
   const { field, fieldState } = useController({
@@ -81,16 +82,19 @@ export const ControlledCheckbox = <
       value={field.value}
       name={field.name}
       error={Boolean(fieldState.error)}
-      onChange={field.onChange}
+      onChange={(e, checked) => field.onChange(checked)}
+      onBlur={field.onBlur}
+      checked={field.value}
       labelPlacement={labelPlacement}
       helperText={fieldState.error?.message || helperText}
       label={label}
       fullWidth={fullWidth}
       required={required}
-      checked={checked}
       checkboxColor={checkboxColor}
       inputProps={inputProps}
       disabled={disabled}
-    />
+    >
+      {children}
+    </Checkbox>
   )
 }
