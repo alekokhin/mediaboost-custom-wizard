@@ -34,6 +34,28 @@ const DescriptionStep = () => {
       <Stack spacing={2}>
         <Box>
           <Typography fontWeight="700" fontSize="16px">
+            First Name
+          </Typography>
+          <ControlledTextField
+            control={control}
+            name="description.firstName"
+            placeholder="first name"
+            fullWidth
+          />
+        </Box>
+        <Box>
+          <Typography fontWeight="700" fontSize="16px">
+            Last Name
+          </Typography>
+          <ControlledTextField
+            control={control}
+            name="description.lastName"
+            placeholder="last name"
+            fullWidth
+          />
+        </Box>
+        <Box>
+          <Typography fontWeight="700" fontSize="16px">
             Phone Number
           </Typography>
           <MuiPhone
