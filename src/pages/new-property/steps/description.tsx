@@ -5,6 +5,7 @@ import { ControlledTextArea } from 'components/form/controlled/controlled-text-a
 import { ControlledTextField } from 'components/form/controlled/controlled-text-field'
 import { MuiPhone } from 'components/form/controlled/phone-number'
 import { email } from 'components/form/validations'
+import { TYPES } from 'constants/types'
 import { useFormContext } from 'react-hook-form'
 
 const DescriptionStep = () => {

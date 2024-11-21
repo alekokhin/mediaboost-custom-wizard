@@ -14,11 +14,11 @@ import {
 } from '@mui/icons-material'
 import { Box, Divider, Grid2, Stack, Typography } from '@mui/material'
 import PlaceOfferCard from 'components/basics/place-offer-card'
-import { ControlledCheckbox } from 'components/form/controlled/controlled-checkbox'
 import { ControlledSelect } from 'components/form/controlled/controlled-select'
 import { ControlledTextField } from 'components/form/controlled/controlled-text-field'
 import { number } from 'components/form/validations'
-import { useFormContext } from 'react-hook-form'
+import { TYPES } from 'constants/types'
+import { useFieldArray, useFormContext } from 'react-hook-form'
 import { v4 as uuid } from 'uuid'
 
 const placeOffers = [
@@ -39,17 +39,16 @@ const placeOffers = [
     icon: <LocalLaundryServiceOutlined />,
     key: 'washer',
   },
+  {
+    label: 'Fitness',
+    icon: <FitnessCenterOutlined />,
+    key: 'fitness',
+  },
 
   {
     label: 'AC',
     icon: <AcUnitOutlined />,
     key: 'ac',
-  },
-
-  {
-    label: 'Fitness',
-    icon: <FitnessCenterOutlined />,
-    key: 'fitness',
   },
 
   {
@@ -84,7 +83,7 @@ const placeOffers = [
   {
     label: 'First aid kit',
     icon: <MedicalServicesOutlined />,
-    key: 'firePit',
+    key: 'firstAidKit',
   },
   {
     label: 'Local hospital',
@@ -95,6 +94,19 @@ const placeOffers = [
 
 const DetailsStep = () => {
   const { control } = useFormContext<TYPES.PropertyFormData>()
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'details.placeOffers',
+  })
+  const handleChange = (placeOffer: TYPES.PlaceOffer) => {
+    const existingIndex = fields.findIndex(item => item.key === placeOffer.key)
+
+    if (existingIndex === -1) {
+      append(placeOffer)
+    } else {
+      remove(existingIndex)
+    }
+  }
 
   // Define the details array with proper typing
   const details: Array<{
@@ -151,7 +163,7 @@ const DetailsStep = () => {
         </Typography>
         <Stack justifyContent="space-between" height="100%" margin="50px 0">
           <Grid2 container spacing={2}>
-            {details.map((detail, index) => {
+            {details.map(detail => {
               return (
                 <Grid2 size={6} key={uuid()}>
                   <Box
@@ -164,7 +176,6 @@ const DetailsStep = () => {
                       control={control}
                       type="number"
                       rules={number}
-                      readonly={index !== 0}
                       placeholder="0"
                       slotProps={{ input: { sx: { border: 0 } } }}
                       sx={{
@@ -192,22 +203,21 @@ const DetailsStep = () => {
             sx={{
               display: 'flex',
               flexWrap: 'wrap',
-              maxHeight: '200px',
+              maxHeight: '250px',
+              height: '200px',
               overflow: 'auto',
+              gap: '10px',
+              padding: '10px',
             }}
           >
             {placeOffers.map(placeOffer => (
-              <ControlledCheckbox
+              <PlaceOfferCard
                 key={placeOffer.key}
-                control={control}
-                name={`details.placeOffers.${placeOffer.key}`}
-              >
-                <PlaceOfferCard
-                  key={placeOffer.key}
-                  label={placeOffer.label}
-                  icon={placeOffer.icon}
-                />
-              </ControlledCheckbox>
+                label={placeOffer.label}
+                icon={placeOffer.icon}
+                select={fields.some(item => item.key === placeOffer.key)}
+                onClick={() => handleChange(placeOffer)}
+              />
             ))}
           </Box>
           <Box>

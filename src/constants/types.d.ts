@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 // types.d.ts
 declare namespace TYPES {
   type Pagination<T> = {
@@ -14,6 +16,11 @@ declare namespace TYPES {
   type PropertyImage = {
     image: Blob
     description: string
+  }
+  type PlaceOffer = {
+    key: string
+    label: string
+    icon: ReactNode
   }
   type PropertyFormData = {
     address: {
@@ -34,7 +41,7 @@ declare namespace TYPES {
       price: number
       currency: string
       period: string
-      placeOffers: Record<string, { value?: boolean }>
+      placeOffers: Array<PlaceOffer>
     }
     images: Array<PropertyImage>
 

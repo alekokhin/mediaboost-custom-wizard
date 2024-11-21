@@ -12,6 +12,8 @@ import Bath from 'assets/icons/bath.png'
 import Bedroom from 'assets/icons/bedroom.png'
 import Rooms from 'assets/icons/rooms.png'
 import Size from 'assets/icons/size.png'
+import PlaceOfferCard from 'components/basics/place-offer-card'
+import { TYPES } from 'constants/types'
 import { useFormContext } from 'react-hook-form'
 import { FreeMode, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -197,6 +199,24 @@ const ReviewStep = () => {
               m
             </Typography>
           </Box>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            maxHeight: '250px',
+            overflow: 'auto',
+            gap: '10px',
+            padding: '10px 0',
+          }}
+        >
+          {values.details.placeOffers.map(placeOffer => (
+            <PlaceOfferCard
+              key={placeOffer.key}
+              label={placeOffer.label}
+              icon={placeOffer.icon}
+            />
+          ))}
         </Box>
         <Divider sx={{ borderWidth: '5px' }} />
         <Stack spacing={2}>

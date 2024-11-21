@@ -13,6 +13,7 @@ import {
 } from '@mui/material'
 import { useMutation } from '@tanstack/react-query'
 import { sendWizard } from 'api/wizard'
+import { TYPES } from 'constants/types'
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 
