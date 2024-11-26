@@ -7,6 +7,10 @@ declare namespace TYPES {
     totalPages: number
     totalElements: number
   }
+  type Template = {
+    id: string
+    previewUrl: string
+  }
   type Range = {
     startDate: string
     endDate: string
@@ -23,6 +27,7 @@ declare namespace TYPES {
     icon: ReactNode
   }
   type PropertyFormData = {
+    designId: string
     address: {
       // Address step
       street: string

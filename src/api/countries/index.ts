@@ -1,3 +1,4 @@
+import { TYPES } from 'constants/types'
 import { request } from 'lib/request'
 
 export const getCountries = () =>

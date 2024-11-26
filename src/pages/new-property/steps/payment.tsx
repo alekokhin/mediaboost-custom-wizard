@@ -1,6 +1,7 @@
 // steps/payment.tsx
 import { Box } from '@mui/material'
 import { ControlledTextField } from 'components/form/controlled/controlled-text-field'
+import { TYPES } from 'constants/types'
 import { useFormContext } from 'react-hook-form'
 
 const PaymentStep = () => {
