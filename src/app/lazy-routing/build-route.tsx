@@ -1,6 +1,7 @@
 import { importWithRetry } from 'app/lazy-routing/import-with-retry'
 import ProtectedRoutes from 'app/protected-routes'
 import Loader from 'components/loader'
+import { TYPES } from 'constants/types'
 import { ComponentType, Suspense } from 'react'
 import { lazyWithPreload } from 'react-lazy-with-preload'
 import {
