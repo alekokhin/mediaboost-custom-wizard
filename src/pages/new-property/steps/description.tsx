@@ -4,7 +4,7 @@ import { Box, Stack, Typography } from '@mui/material'
 import { ControlledTextArea } from 'components/form/controlled/controlled-text-area'
 import { ControlledTextField } from 'components/form/controlled/controlled-text-field'
 import { MuiPhone } from 'components/form/controlled/phone-number'
-import { email } from 'components/form/validations'
+import { email, text } from 'components/form/validations'
 import { TYPES } from 'constants/types'
 import { useFormContext } from 'react-hook-form'
 
@@ -41,6 +41,7 @@ const DescriptionStep = () => {
             control={control}
             name="description.firstName"
             placeholder="first name"
+            rules={text}
             fullWidth
           />
         </Box>
@@ -52,6 +53,7 @@ const DescriptionStep = () => {
             control={control}
             name="description.lastName"
             placeholder="last name"
+            rules={text}
             fullWidth
           />
         </Box>

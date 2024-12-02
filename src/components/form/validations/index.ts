@@ -3,8 +3,7 @@ const emailRegex =
   // eslint-disable-next-line security/detect-unsafe-regex, sonarjs/regex-complexity
   /^(([^\s"(),.:;<>@[\\\]]+(\.[^\s"(),.:;<>@[\\\]]+)*)|(".+"))@((\[(?:\d{1,3}\.){3}\d{1,3}])|(([\dA-Za-z-]+\.)+[A-Za-z]{2,}))$/
 const numberRegex = /^\d+$/
-const firstNameRegex = /^[ A-Za-z-]+$/
-const lastNameRegex = /^[ A-Za-z-]+$/
+const textRegex = /^[ A-Za-z-]+$/
 const phoneNumberRegex = /^(?:\d{3}-\d{3}-\d{4}|\(\d{3}\) \d{3}-\d{4})$/
 
 export const isRequired = (required: boolean = false) =>
@@ -28,16 +27,10 @@ export const email = {
     message: 'Please enter a valid email address',
   },
 }
-export const lastName = {
+export const text = {
   pattern: {
-    value: lastNameRegex,
-    message: 'last name must contain only letters',
-  },
-}
-export const firstName = {
-  pattern: {
-    value: firstNameRegex,
-    message: 'first name must contain only letters',
+    value: textRegex,
+    message: 'Please enter only letters',
   },
 }
 
