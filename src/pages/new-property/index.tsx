@@ -21,6 +21,7 @@ import AddressStep from './steps/address/address'
 import DescriptionStep from './steps/description'
 import DetailsStep from './steps/details'
 import ImagesStep from './steps/images'
+import PaymentStep from './steps/payment'
 import ReviewStep from './steps/review'
 
 const CustomStepIcon: React.FC<StepIconProps> = ({ active, completed }) => {
@@ -53,6 +54,9 @@ const getStep = (step: number) => {
     case 4: {
       return <ReviewStep />
     }
+    case 5: {
+      return <PaymentStep />
+    }
     default: {
       return null
     }
@@ -61,7 +65,7 @@ const getStep = (step: number) => {
 
 const getFormData = (data: TYPES.PropertyFormData) => {
   const formData = new FormData()
-  const { images, ...dataWithoutImages } = data
+  const { images, plan, ...dataWithoutImages } = data
 
   // Append the main data object
 
@@ -74,6 +78,7 @@ const getFormData = (data: TYPES.PropertyFormData) => {
     'data',
     JSON.stringify({ ...dataWithoutImages, imageDescriptions }),
   )
+  formData.append('plan', plan)
 
   for (const image of images) {
     formData.append('images ', image.image)
@@ -90,6 +95,7 @@ const NewProperty = () => {
     'Additional description',
     'Property images',
     'Final review',
+    'payment',
   ]
   const [activeStep, setActiveStep] = useState(0)
 
@@ -159,8 +165,14 @@ const NewProperty = () => {
                 >
                   Back
                 </Button>
-                <Button type="submit" variant="contained">
-                  {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{
+                    display: activeStep === steps.length - 1 ? 'none' : 'block',
+                  }}
+                >
+                  Next
                 </Button>
               </Box>
             </Stack>

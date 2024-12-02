@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable sonarjs/no-clear-text-protocols */
 import 'swiper/css'
 import 'swiper/css/free-mode'
@@ -338,8 +337,6 @@ const ReviewStep = () => {
                       width: '40%',
                     }}
                     onClick={() => {
-                      console.log(typeof value)
-                      console.log(typeof layout.id)
                       onChange(layout.id)
                     }}
                   >

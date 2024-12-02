@@ -8,8 +8,7 @@ export const createRequestBody = (
   if (!body) return
 
   if (type === 'json') return JSON.stringify(body)
-  // eslint-disable-next-line no-console
-  console.log(body)
+
   return body
 
   // const formData = new FormData()

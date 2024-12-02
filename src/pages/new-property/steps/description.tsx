@@ -12,7 +12,7 @@ const DescriptionStep = () => {
   const { control } = useFormContext<TYPES.PropertyFormData>()
 
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} height="100%" overflow="auto">
       <Typography fontWeight="700" fontSize="16px">
         Input your concluding description here.
       </Typography>

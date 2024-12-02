@@ -49,6 +49,7 @@ declare namespace TYPES {
       placeOffers: Array<PlaceOffer>
     }
     images: Array<PropertyImage>
+    plan: string
 
     description: {
       description: string
@@ -60,6 +61,18 @@ declare namespace TYPES {
       }
       email: string
     }
+  }
+  type Plan = {
+    serviceType: string
+    name: string
+    price: number
+    priceUsd: string
+    impressions: number
+    type: string
+    planName: string
+    plan: string
+    orderNumber: number
+    active: true
   }
   type country = {
     flags: {
