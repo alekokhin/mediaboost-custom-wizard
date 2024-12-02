@@ -6,56 +6,6 @@ import { getPlans } from 'api/plans'
 import planCheckIcon from 'assets/icons/plan-check.png'
 import { TYPES } from 'constants/types'
 import { Controller, useFormContext } from 'react-hook-form'
-const plans: Array<TYPES.Plan> = [
-  {
-    serviceType: 'ADS_LAYERS_12000',
-    name: '12000 Guaranteed Impressions',
-    price: 9995,
-    priceUsd: '99.95',
-    impressions: 12_000,
-    type: 'LAYERS',
-    planName: 'Planner',
-    plan: 'MONTH',
-    orderNumber: 1,
-    active: true,
-  },
-  {
-    serviceType: 'ADS_LAYERS_20000',
-    name: '20000 Guaranteed Impressions',
-    price: 14_995,
-    priceUsd: '149.95',
-    impressions: 20_000,
-    type: 'LAYERS',
-    planName: 'Accelerator',
-    plan: 'MONTH',
-    orderNumber: 2,
-    active: true,
-  },
-  {
-    serviceType: 'ADS_LAYERS_28000',
-    name: '28000 Guaranteed Impressions',
-    price: 19_995,
-    priceUsd: '199.95',
-    impressions: 28_000,
-    type: 'LAYERS',
-    planName: 'Booster',
-    plan: 'MONTH',
-    orderNumber: 4,
-    active: true,
-  },
-  {
-    serviceType: 'ADS_LAYERS_50000',
-    name: '50000 Guaranteed Impressions',
-    price: 29_995,
-    priceUsd: '299.95',
-    impressions: 50_000,
-    type: 'LAYERS',
-    planName: 'Leader',
-    plan: 'MONTH',
-    orderNumber: 4,
-    active: true,
-  },
-]
 
 const PaymentStep = () => {
   const { control } = useFormContext<TYPES.PropertyFormData>()
@@ -95,7 +45,7 @@ const PaymentStep = () => {
         }}
         render={({ field: { onChange } }) => (
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '30px' }}>
-            {plans.map(plan => (
+            {(data || []).map(plan => (
               <Box
                 key={plan.serviceType}
                 sx={{
@@ -162,7 +112,7 @@ const PaymentStep = () => {
                       fontSize: '14px',
                     }}
                     type="submit"
-                    onClick={() => onChange(plan)}
+                    onClick={() => onChange(plan.serviceType)}
                   >
                     Create Ad
                   </Button>

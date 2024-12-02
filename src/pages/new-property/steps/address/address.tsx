@@ -49,6 +49,7 @@ const AddressStep = () => {
             name="address.country"
             label="country"
             fullWidth
+            required
             getOptionLabel={option => option.label}
             renderOption={(props, option) => {
               const { key, ...optionProps } = props
@@ -79,6 +80,7 @@ const AddressStep = () => {
             name="address.city"
             rules={text}
             fullWidth
+            required
             label="city"
           />
         </Grid2>
@@ -86,6 +88,7 @@ const AddressStep = () => {
           <ControlledTextField
             control={control}
             name="address.zipCode"
+            required
             fullWidth
             label="zip/postal"
             type="number"
@@ -95,6 +98,7 @@ const AddressStep = () => {
           <ControlledTextField
             control={control}
             fullWidth
+            required
             name="address.street"
             label="street address"
           />

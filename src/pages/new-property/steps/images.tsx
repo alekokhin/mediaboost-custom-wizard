@@ -146,6 +146,7 @@ const ImagesStep = () => {
                   type="file"
                   accept="image/*"
                   multiple
+                  required
                   hidden
                   onChange={handleImageUpload}
                 />

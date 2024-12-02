@@ -22,6 +22,7 @@ const DescriptionStep = () => {
         multiline
         counter
         fullWidth
+        required
         name="description.description"
         rows={8}
         slotProps={{
@@ -42,6 +43,7 @@ const DescriptionStep = () => {
             name="description.firstName"
             placeholder="first name"
             rules={text}
+            required
             fullWidth
           />
         </Box>
@@ -54,6 +56,7 @@ const DescriptionStep = () => {
             name="description.lastName"
             placeholder="last name"
             rules={text}
+            required
             fullWidth
           />
         </Box>
@@ -77,6 +80,7 @@ const DescriptionStep = () => {
             control={control}
             name="description.email"
             rules={email}
+            required
             placeholder="example@gmail.com"
             fullWidth
           />

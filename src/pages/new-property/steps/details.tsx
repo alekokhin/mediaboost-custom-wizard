@@ -177,6 +177,7 @@ const DetailsStep = () => {
                       type="number"
                       rules={number}
                       placeholder="0"
+                      required
                       slotProps={{ input: { sx: { border: 0 } } }}
                       sx={{
                         '& .MuiOutlinedInput-root': {
@@ -241,6 +242,7 @@ const DetailsStep = () => {
                 <Box sx={{ width: '60%' }}>
                   <ControlledTextField
                     fullWidth
+                    required
                     slotProps={{
                       input: {
                         inputProps: { min: 0 },

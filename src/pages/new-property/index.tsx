@@ -14,6 +14,7 @@ import {
 import { animated, useTransition } from '@react-spring/web'
 import { useMutation } from '@tanstack/react-query'
 import { sendWizard } from 'api/wizard'
+import Loader from 'components/loader'
 import { TYPES } from 'constants/types'
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -100,7 +101,6 @@ const NewProperty = () => {
   ]
   const [activeStep, setActiveStep] = useState(0)
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward')
-
   // ===============animations================================
   const transitions = useTransition(activeStep, {
     from: {
@@ -126,12 +126,13 @@ const NewProperty = () => {
       details: { period: 'Month', currency: 'USD' },
     },
   })
-
+  console.log($sendWizard.isPending)
   const onSubmit = (data: TYPES.PropertyFormData) => {
     if (activeStep === steps.length - 1) {
       const body = getFormData(data)
       $sendWizard.mutate(body, {
         onSuccess: data => {
+          window.location.href = data
           console.log('Data submitted successfully:', data)
         },
         onError: error => {
@@ -159,6 +160,7 @@ const NewProperty = () => {
   return (
     <FormProvider {...methods}>
       <Container sx={{ padding: '0' }} maxWidth="sm">
+        {$sendWizard.isPending && <Loader />}
         <Box component="form" onSubmit={methods.handleSubmit(onSubmit)}>
           <Stack sx={{ padding: '16px 0px 10px 0px', height: '95dvh' }}>
             <Stepper alternativeLabel activeStep={activeStep}>
@@ -185,7 +187,7 @@ const NewProperty = () => {
                 <LinearProgress variant="determinate" value={progress} />
               </Box>
               <Box
-                sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}
+                sx={{ display: 'flex', justifyContent: 'space-between', m: 2 }}
               >
                 <Button
                   disabled={activeStep === 0}
