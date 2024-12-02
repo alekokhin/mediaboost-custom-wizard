@@ -11,6 +11,7 @@ import {
   StepLabel,
   Stepper,
 } from '@mui/material'
+import { animated, useTransition } from '@react-spring/web'
 import { useMutation } from '@tanstack/react-query'
 import { sendWizard } from 'api/wizard'
 import { TYPES } from 'constants/types'
@@ -98,7 +99,24 @@ const NewProperty = () => {
     'payment',
   ]
   const [activeStep, setActiveStep] = useState(0)
+  const [direction, setDirection] = useState<'forward' | 'backward'>('forward')
 
+  // ===============animations================================
+  const transitions = useTransition(activeStep, {
+    from: {
+      opacity: 0,
+      transform:
+        direction === 'forward' ? 'translateX(100%)' : 'translateX(-100%)',
+    },
+    enter: { opacity: 1, transform: 'translateX(0%)' },
+    leave: {
+      opacity: 0,
+      transform:
+        direction === 'forward' ? 'translateX(-100%)' : 'translateX(100%)',
+    },
+    config: { duration: 250 },
+  })
+  // ===============animations================================
   // Set up the mutation with the correct type for FormData
   const $sendWizard = useMutation({
     mutationFn: sendWizard,
@@ -126,10 +144,12 @@ const NewProperty = () => {
   }
 
   const handleNext = () => {
+    setDirection('forward')
     setActiveStep(prevActiveStep => prevActiveStep + 1)
   }
 
   const handleBack = () => {
+    setDirection('backward')
     setActiveStep(prevActiveStep => prevActiveStep - 1)
   }
   console.log(methods.getValues())
@@ -148,8 +168,17 @@ const NewProperty = () => {
                 </Step>
               ))}
             </Stepper>
+
             <Container sx={{ height: '85%', padding: '16px' }}>
-              {getStep(activeStep)}
+              {transitions((style, stepIndex) =>
+                stepIndex === activeStep ? (
+                  <animated.div
+                    style={{ ...style, width: '100%', height: '100%' }}
+                  >
+                    {getStep(stepIndex)}
+                  </animated.div>
+                ) : null,
+              )}
             </Container>
             <Stack>
               <Box sx={{ my: 2 }}>
