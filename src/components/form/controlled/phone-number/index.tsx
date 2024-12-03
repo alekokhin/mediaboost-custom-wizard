@@ -1,11 +1,7 @@
-import {
-  InputAdornment,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { InputAdornment, MenuItem, Select, Typography } from '@mui/material'
+import { TextField } from 'components/form/basic/text-field'
 import { isRequired } from 'components/form/validations'
+import { isValidPhoneNumber } from 'libphonenumber-js'
 import { FieldPath, FieldValues, useController } from 'react-hook-form'
 import {
   CountryIso2,
@@ -54,6 +50,23 @@ export const MuiPhone = <
     rules: {
       ...rules,
       required: isRequired(required),
+      validate: {
+        // Add phone number validation
+        validPhoneNumber: value => {
+          // Check if the value is empty and not required
+          if (!value?.number && !required) return true
+
+          // Validate phone number using react-international-phone
+          if (
+            !value?.number ||
+            !isValidPhoneNumber(value.number, value.country)
+          ) {
+            return 'Please enter a valid phone number'
+          }
+
+          return true
+        },
+      },
     },
   })
 

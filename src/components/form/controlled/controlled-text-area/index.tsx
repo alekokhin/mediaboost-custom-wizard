@@ -103,6 +103,7 @@ export const ControlledTextArea = <
         helperText={fieldState.error?.message || helperText}
         label={label}
         disabled={disabled}
+        error={Boolean(fieldState.error)}
         required={required}
         placeholder={placeholder}
         InputProps={InputProps}

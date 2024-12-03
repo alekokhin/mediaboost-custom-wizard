@@ -62,7 +62,6 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
         <MuiTextField
           ref={ref}
           size="small"
-          required={required}
           label={label}
           {...textFieldProps}
           error={error}

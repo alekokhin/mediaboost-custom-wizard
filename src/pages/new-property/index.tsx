@@ -42,13 +42,13 @@ const CustomStepIcon: React.FC<StepIconProps> = ({ active, completed }) => {
 const getStep = (step: number) => {
   switch (step) {
     case 0: {
-      return <AddressStep />
+      return <DescriptionStep />
     }
     case 1: {
       return <DetailsStep />
     }
     case 2: {
-      return <DescriptionStep />
+      return <AddressStep />
     }
     case 3: {
       return <ImagesStep />

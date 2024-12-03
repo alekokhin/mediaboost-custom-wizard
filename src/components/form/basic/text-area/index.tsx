@@ -48,11 +48,10 @@ export const TextArea = forwardRef<HTMLDivElement, TextAreaProps>(
         disabled={textFieldProps.disabled}
       >
         <MuiTextField
-          label={label}
           ref={ref}
+          label={label}
           {...textFieldProps}
           error={error}
-          type={textFieldProps.type}
           inputProps={{ maxLength: 150_000 }}
           {...(disableAutofill
             ? {
